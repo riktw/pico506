@@ -1,0 +1,6 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "max3491")(type "KiCad")(uri "/home/rik/Downloads/ElectronicsProjects/Kicad/max3491.kicad_sym")(options "")(descr ""))
+  (lib (name "conn20")(type "KiCad")(uri "/home/rik/Downloads/ElectronicsProjects/Kicad/con20_edge.kicad_sym")(options "")(descr ""))
+  (lib (name "conn34")(type "KiCad")(uri "/home/rik/Downloads/ElectronicsProjects/Kicad/con34_edge.kicad_sym")(options "")(descr ""))
+)

@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "mfm")(type "KiCad")(uri "/home/rik/Downloads/mfm_revd_pcb/all_fp.pretty")(options "")(descr ""))
+)
