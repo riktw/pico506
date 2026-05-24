@@ -55,6 +55,9 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
+# mac
+*.DS_Store
+
 ### C++ ###
 # Prerequisites
 
