@@ -138,7 +138,7 @@
         "min_hole_to_hole": 0.25,
         "min_microvia_diameter": 0.2,
         "min_microvia_drill": 0.1,
-        "min_resolved_spokes": 2,
+        "min_resolved_spokes": 1,
         "min_silk_clearance": 0.0,
         "min_text_height": 0.8,
         "min_text_thickness": 0.08,
@@ -669,7 +669,7 @@
         "uuid": "e694b1f3-f99c-4379-9386-85ff4d1454d2"
       }
     ],
-    "used_designators": "",
+    "used_designators": "U6-7,R3-4,C6,J7-9,#PWR39-43",
     "variants": []
   },
   "sheets": [
