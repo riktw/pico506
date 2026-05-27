@@ -8,31 +8,33 @@
 // Control Input
 #define PIN_SELECT		  11
 #define PIN_WRITE_GATE	  2
+#define PIN_HEAD_0		  14
 #define PIN_HEAD_1		  4
+#define PIN_HEAD_2		  15
 #define PIN_DIR_IN		  13
 #define PIN_STEP		  12
 // Control Output
 #define PIN_SEEK_COMPLETE 10
-#define PIN_SERVO_GATE	  7
+#define PIN_SERVO_GATE	  17 // unused on MFM
 #define PIN_INDEX		  6
 #define PIN_TRACK_0		  9
 #define PIN_READY		  8
 // Buzzer
-#define PIN_BUZZER		  15
+#define PIN_BUZZER		  16 // moved to 16 from 15
 // SD Card
 #define PIN_SD_SCK		  18
 #define PIN_SD_MOSI		  19
 #define PIN_SD_MISO		  20
 #define PIN_SD_CS		  21
 
-#define DATA_RATE		  7500000
-#define MARK_LBYTES		  50
-#define HEADER_LBYTES	  100
+#define DATA_RATE		  5000000
+#define MARK_LBYTES		  120
+#define HEADER_LBYTES	  50
 #define DATA_LBYTES		  512
-#define SECTORS_PER_PULSE 2
+#define SECTORS_PER_PULSE 1
 #define PULSES_PER_TRACK  17
-#define HEADS			  2
-#define CYLINDERS		  615
+#define HEADS			  4
+#define CYLINDERS		  322
 
 #define MARK_BITS	(MARK_LBYTES * 8 * 2)
 #define SECTOR_BITS ((HEADER_LBYTES + DATA_LBYTES) * 8 * 2)

@@ -53,7 +53,9 @@ int st506_start(pico506_t *pico) {
 
 	// store pico506_t* for IRQ callback
 	g_pico = pico;
+	gpio_set_irq_enabled_with_callback(PIN_HEAD_0, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true, st506_head_irq);
 	gpio_set_irq_enabled_with_callback(PIN_HEAD_1, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true, st506_head_irq);
+	gpio_set_irq_enabled_with_callback(PIN_HEAD_2, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true, st506_head_irq);
 
 	// load initial cylinder data
 	LT_V("Loading cylinder data...");
@@ -143,7 +145,9 @@ void st506_stop(pico506_t *pico) {
 
 	LT_V("Disabling GPIO...");
 	g_pico = NULL;
+	gpio_set_irq_enabled_with_callback(PIN_HEAD_0, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, false, NULL);
 	gpio_set_irq_enabled_with_callback(PIN_HEAD_1, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, false, NULL);
+	gpio_set_irq_enabled_with_callback(PIN_HEAD_2, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, false, NULL);
 	gpio_set_function(PIN_SERVO_GATE, GPIO_FUNC_NULL);
 	gpio_set_function(PIN_INDEX, GPIO_FUNC_NULL);
 	gpio_set_function(PIN_READ, GPIO_FUNC_NULL);
@@ -196,7 +200,8 @@ static void st506_head_irq(uint gpio, uint32_t event_mask) {
 	(void)gpio, (void)event_mask;
 	if (!g_pico)
 		return;
-	uint hd = gpio_get(PIN_HEAD_1);
+	uint hd = gpio_get(PIN_HEAD_0) + (gpio_get(PIN_HEAD_1) << 1) | (gpio_get(PIN_HEAD_2) << 2);
+	LT_V("Head %x", hd);
 	st506_on_head(g_pico, hd);
 }
 
@@ -287,7 +292,7 @@ void st506_on_seek(pico506_t *pico, uint cyl) {
 		uint write_bytes	  = st506_do_write(pico);
 		absolute_time_t end	  = get_absolute_time();
 
-		ulong micros = absolute_time_diff_us(start, end);
+		long micros	 = absolute_time_diff_us(start, end);
 		double speed = (double)write_bytes / ((double)micros / 1000000.0) / 1024.0;
 		LT_D(
 			"Write of cylinder %u (%u bytes) finished in %lu us -> %.03f KiB/s",
@@ -328,7 +333,7 @@ void st506_on_seek(pico506_t *pico, uint cyl) {
 	}
 	absolute_time_t end = get_absolute_time();
 
-	ulong micros = absolute_time_diff_us(start, end);
+	long micros	 = absolute_time_diff_us(start, end);
 	double speed = (double)read_bytes / ((double)micros / 1000000.0) / 1024.0;
 	LT_D(
 		"Read of cylinder %u (%u bytes) finished in %lu us -> %.03f KiB/s",
