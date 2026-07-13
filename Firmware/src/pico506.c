@@ -26,11 +26,11 @@ int main() {
 		if (storage_open(pico, "/HDD.RLL") != 0)
 			goto retry;
 
-		// if (pico->storage.file_size != DRIVE_BYTES) {
-		//	LT_E("Image file size invalid, found %u bytes, expected %u bytes", pico->storage.file_size, DRIVE_BYTES);
-		//	storage_close(pico);
-		//	goto retry;
-		// }
+		if (pico->storage.file_size != DRIVE_BYTES) {
+			LT_E("Image file size invalid, found %u bytes, expected %u bytes", pico->storage.file_size, DRIVE_BYTES);
+			storage_close(pico);
+			goto retry;
+		}
 		LT_I("Image file size OK");
 
 		break;

@@ -1,3 +1,13 @@
+# Pico506 changes
+
+This repo adds a PCB that can be used to replace an existing MFM HDD.
+It also adds support for 4 HEAD lines instead of 2 and for drive select support.
+
+This is tested with an MFM emulator, but does not always work in machines, and has not been tested with many computers. Use at your own risk!
+If you own a LOT of MFM computers and want to help test it, please make an issue or contact me!
+
+The main issue seems to be in machines that unselect and reselect the drive after every command.
+
 # Pico506
 
 The smallest and cheapest ST-506/RLL/MFM hard drive emulator.
