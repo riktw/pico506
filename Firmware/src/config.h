@@ -6,17 +6,19 @@
 #define PIN_READ		  5
 #define PIN_WRITE		  3
 // Control Input
-#define PIN_SELECT		  11
 #define PIN_WRITE_GATE	  2
-#define PIN_HEAD_0		  14
+#define PIN_HEAD_0		  13
 #define PIN_HEAD_1		  4
-#define PIN_HEAD_2		  15
-#define PIN_DIR_IN		  13
-#define PIN_STEP		  12
+#define PIN_HEAD_2		  14
+#define PIN_HEAD_3		  15
+#define PIN_DIR_IN		  12
+#define PIN_STEP		  11
+#define DEVICE_SELECT	  17
 // Control Output
 #define PIN_SEEK_COMPLETE 10
-#define PIN_SERVO_GATE	  17 // unused on MFM
+#define PIN_SERVO_GATE	  22 // unused on MFM
 #define PIN_INDEX		  6
+#define PIN_WRITEFAULT	  7
 #define PIN_TRACK_0		  9
 #define PIN_READY		  8
 // Buzzer
@@ -29,11 +31,11 @@
 
 #define DATA_RATE		  5000000
 #define MARK_LBYTES		  120
-#define HEADER_LBYTES	  50
+#define HEADER_LBYTES	  120 // 100 for 512b sectors, 70 for 256b sectors
 #define DATA_LBYTES		  512
 #define SECTORS_PER_PULSE 1
 #define PULSES_PER_TRACK  17
-#define HEADS			  4
+#define HEADS			  2
 #define CYLINDERS		  322
 
 #define MARK_BITS	(MARK_LBYTES * 8 * 2)

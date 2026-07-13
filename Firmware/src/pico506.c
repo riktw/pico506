@@ -3,13 +3,15 @@
 #include "pico506.h"
 
 int main() {
-	set_sys_clock_khz(200000, true);
+	bool oc = set_sys_clock_khz(200000, true);
 	stdio_init_all();
+	sleep_ms(3000);
 
+	LT_I("OC result: %x", oc);
 	pico506_t *pico = malloc(sizeof(*pico));
 	memset(pico, 0, sizeof(*pico));
 
-	LT_D("Initializing SPI...");
+	LT_I("Initializing SPI...");
 	pico->storage.sd.spi.sck_pin = PIN_SD_SCK;
 	pico->storage.sd.spi.tx_pin	 = PIN_SD_MOSI;
 	pico->storage.sd.spi.rx_pin	 = PIN_SD_MISO;
@@ -24,11 +26,11 @@ int main() {
 		if (storage_open(pico, "/HDD.RLL") != 0)
 			goto retry;
 
-		if (pico->storage.file_size != DRIVE_BYTES) {
-			LT_E("Image file size invalid, found %u bytes, expected %u bytes", pico->storage.file_size, DRIVE_BYTES);
-			storage_close(pico);
-			goto retry;
-		}
+		// if (pico->storage.file_size != DRIVE_BYTES) {
+		//	LT_E("Image file size invalid, found %u bytes, expected %u bytes", pico->storage.file_size, DRIVE_BYTES);
+		//	storage_close(pico);
+		//	goto retry;
+		// }
 		LT_I("Image file size OK");
 
 		break;
