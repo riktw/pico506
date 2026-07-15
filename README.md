@@ -1,5 +1,7 @@
 # Pico506 changes
 
+![mfmpico](images/mfmpico.jpg)
+
 This repo adds a PCB that can be used to replace an existing MFM HDD.
 It also adds support for 4 HEAD lines instead of 2 and for drive select support.
 
