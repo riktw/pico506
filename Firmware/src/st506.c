@@ -52,7 +52,7 @@ int st506_start(pico506_t *pico) {
 
 	pio_gpio_init(PIO_RDDT, PIN_READ);
 	pio_gpio_init(PIO_RDGT, PIN_INDEX);
-	pio_gpio_init(PIO_RDGT, PIN_SERVO_GATE);
+	// pio_gpio_init(PIO_RDGT, PIN_SERVO_GATE);
 
 	// store pico506_t* for IRQ callback
 	g_pico = pico;
