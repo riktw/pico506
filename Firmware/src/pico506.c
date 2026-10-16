@@ -5,7 +5,12 @@
 int main() {
 	bool oc = set_sys_clock_khz(200000, true);
 	stdio_init_all();
-	sleep_ms(3000);
+	gpio_init_mask((1 << PIN_SEEK_COMPLETE) | (1 << PIN_TRACK_0) | (1 << PIN_READY));
+	gpio_set_dir_out_masked((1 << PIN_SEEK_COMPLETE) | (1 << PIN_TRACK_0) | (1 << PIN_READY));
+	gpio_put(PIN_SEEK_COMPLETE, false);
+	gpio_put(PIN_TRACK_0, false);
+	gpio_put(PIN_READY, false);
+	sleep_ms(1000);
 
 	LT_I("OC result: %x", oc);
 	pico506_t *pico = malloc(sizeof(*pico));
@@ -26,11 +31,11 @@ int main() {
 		if (storage_open(pico, "/HDD.RLL") != 0)
 			goto retry;
 
-		if (pico->storage.file_size != DRIVE_BYTES) {
-			LT_E("Image file size invalid, found %u bytes, expected %u bytes", pico->storage.file_size, DRIVE_BYTES);
-			storage_close(pico);
-			goto retry;
-		}
+		// if (pico->storage.file_size != DRIVE_BYTES) {
+		//	LT_E("Image file size invalid, found %u bytes, expected %u bytes", pico->storage.file_size, DRIVE_BYTES);
+		//	storage_close(pico);
+		//	goto retry;
+		// }
 		LT_I("Image file size OK");
 
 		break;
