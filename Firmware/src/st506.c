@@ -68,6 +68,9 @@ int st506_start(pico506_t *pico) {
 	// store pico506_t* for IRQ callback
 	g_pico = pico;
 	gpio_set_irq_enabled_with_callback(PIN_HEAD_0, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true, st506_head_irq);
+	gpio_set_irq_enabled_with_callback(PIN_HEAD_1, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true, st506_head_irq);
+	gpio_set_irq_enabled_with_callback(PIN_HEAD_2, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true, st506_head_irq);
+	gpio_set_irq_enabled_with_callback(PIN_HEAD_3, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true, st506_head_irq);
 	// gpio_set_irq_enabled_with_callback(PIN_STEP, GPIO_IRQ_EDGE_RISE, true, st506_step_irq);
 
 	// load all PIO programs
@@ -238,7 +241,8 @@ static void st506_head_irq(uint gpio, uint32_t event_mask) {
 	(void)gpio, (void)event_mask;
 	if (!g_pico)
 		return;
-	uint hd = gpio_get(PIN_HEAD_0);
+	uint hd =
+		gpio_get(PIN_HEAD_0) | (gpio_get(PIN_HEAD_1) << 1) | (gpio_get(PIN_HEAD_2) << 2) | (gpio_get(PIN_HEAD_3) << 3);
 	st506_on_head(g_pico, hd);
 }
 

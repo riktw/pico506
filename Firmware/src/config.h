@@ -31,11 +31,11 @@
 
 #define DATA_RATE		  5000000
 #define MARK_LBYTES		  42
-#define HEADER_LBYTES	  58 // 100 for 512b sectors, 70 for 256b sectors
+#define HEADER_LBYTES	  58
 #define DATA_LBYTES		  512
 #define SECTORS_PER_PULSE 1
 #define PULSES_PER_TRACK  17
-#define HEADS			  2
+#define HEADS			  2 // Up to 8 supported
 #define CYLINDERS		  322
 
 #define STEP_SETTLE_US 10000
